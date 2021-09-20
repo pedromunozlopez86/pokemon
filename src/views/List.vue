@@ -145,7 +145,9 @@ export default {
     },
 
   },
-  created() {},
+  created() {
+    this.getPokemonInfo('bulbasaur');
+  },
   methods: {
       copiar(){
         let format = `Name: ${this.pokeDatos.name}, Weight: ${this.pokemonInfo.weight}  `
