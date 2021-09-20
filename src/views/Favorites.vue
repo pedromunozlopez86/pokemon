@@ -138,7 +138,8 @@ export default {
     }
   },
   onCreated() {
-    // this.$store.dispatch("getPokemonList");
+    this.getPokemonInfo('bulbasaur');
+
   },
   methods: {
       ...mapActions(['addFavorite','removeFavorite','getPokemonInfo']),
