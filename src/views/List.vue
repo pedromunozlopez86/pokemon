@@ -15,7 +15,6 @@
         <div class="fondo">
           <v-list-item-group v-model="selected" multiple>
             <template v-for="(pokemon, i) in filtradosPorNombre">
-
               <v-list-item :key="i" class=" my-2 white text-left">
                 <v-list-item-content class="">
                   <v-list-item-title
@@ -44,7 +43,6 @@
                   </div>
                 </v-list-item-action>
               </v-list-item>
-
             </template>
           </v-list-item-group>
         </div>
@@ -89,7 +87,7 @@
               <h4 class="secondary--text py-2">
                 Types:
                 <div
-                  v-for="tipos,i in pokemonInfo.types"
+                  v-for="(tipos, i) in pokemonInfo.types"
                   :key="i"
                   class="d-inline-flex justify-start"
                 >
@@ -98,21 +96,28 @@
               </h4>
             </div>
             <v-divider></v-divider>
-          </v-card-text> 
-           <v-card-actions class="d-flex justify-space-between">
+          </v-card-text>
+          <v-card-actions class="d-flex justify-space-between">
             <v-btn color="error" rounded class="mb-3">
               Share with my friends
             </v-btn>
 
             <p></p>
             <div class="fav pl-1 pt-1">
-              <v-icon color="#ECA539" large @click="delFav(pokeDatos,i)" v-if="pokeDatos.favorito">
+              <v-icon
+                color="#ECA539"
+                large
+                @click="delFav(pokeDatos, i)"
+                v-if="pokeDatos.favorito"
+              >
                 mdi-star
               </v-icon>
-              <v-icon color="#BFBFBF" large @click="addFav(pokeDatos,i)" v-else>mdi-star</v-icon>
+              <v-icon color="#BFBFBF" large @click="addFav(pokeDatos, i)" v-else
+                >mdi-star</v-icon
+              >
             </div>
           </v-card-actions>
-        </v-card> 
+        </v-card>
       </v-dialog>
     </div>
   </v-container>
@@ -120,12 +125,10 @@
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
-import Dialog from "@/components/Dialog.vue";
 export default {
-  components: { Dialog },
   data() {
     return {
-    footer : true,
+      footer: true,
       selected: Boolean,
       option: false,
       pokemonName: "",
@@ -139,9 +142,7 @@ export default {
     filtradosPorNombre() {
       return this.pokemonsFiltradosPorNombre(this.pokemonName);
     },
-    // pokemon(){
-    //   this.$getters.pokemonInfo
-    // }
+
   },
   created() {},
   methods: {
@@ -161,7 +162,6 @@ export default {
     },
 
     getPokeInfo(pokemon) {
-      // console.log(typeof name)
       this.pokeDatos = pokemon;
       this.dialog = true;
       this.getPokemonInfo(pokemon.name);

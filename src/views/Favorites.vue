@@ -8,7 +8,6 @@
       elevation-1
       id="search-input"
     ></v-text-field>
-    <v-btn @click="test">favoritos</v-btn>
 
     <v-card class="mx-auto bg--white pt-0" max-width="570" >
       <v-list class="py-0">
@@ -19,9 +18,10 @@
                 <!-- <template v-slot:default="{  }"> -->
                   <v-list-item-content class="">
                     <v-list-item-title
+                     @click="getPokeInfo(pokemon)"
                       v-text="pokemon.name"
                     ></v-list-item-title>
-                    {{pokemon}}
+
                   </v-list-item-content>
                   <v-list-item-action class="pl-4">
                     <div class="fav pl-1 pt-1">
@@ -38,11 +38,80 @@
           </v-list-item-group>
         
         </div>
-        
       </v-list>
-
     </v-card> 
+<!-- dialog -->
 
+ <div class="text-center">
+      <v-dialog v-model="dialog" width="500">
+        <v-card class="mx-auto" max-width="506">
+          <v-img
+            class="white--text align-center "
+            height="200px"
+            src="@/assets/bg_paisaje.png"
+          >
+            <v-img
+              :src="pokemonInfo.sprites.other.dream_world.front_default"
+              contain
+              height="150px"
+            ></v-img>
+          </v-img>
+          <v-card-text class="pt-5">
+            <div>
+              <h4 class="secondary--text py-2">Name: {{ pokemonInfo.name }}</h4>
+            </div>
+            <v-divider></v-divider>
+            <div>
+              <h4 class="secondary--text py-2">
+                Weight: {{ pokemonInfo.weight }}
+              </h4>
+            </div>
+            <v-divider></v-divider>
+
+            <div>
+              <h4 class="secondary--text py-2">
+                Height: {{ pokemonInfo.height }}
+              </h4>
+            </div>
+            <v-divider></v-divider>
+
+            <div>
+              <h4 class="secondary--text py-2">
+                Types:
+                <div
+                  v-for="(tipos, i) in pokemonInfo.types"
+                  :key="i"
+                  class="d-inline-flex justify-start"
+                >
+                  <p>{{ tipos.type.name }},</p>
+                </div>
+              </h4>
+            </div>
+            <v-divider></v-divider>
+          </v-card-text>
+          <v-card-actions class="d-flex justify-space-between">
+            <v-btn color="error" rounded class="mb-3">
+              Share with my friends
+            </v-btn>
+
+            <p></p>
+            <div class="fav pl-1 pt-1">
+              <v-icon
+                color="#ECA539"
+                large
+                @click="delFav(pokeDatos, i)"
+                v-if="pokeDatos.favorito"
+              >
+                mdi-star
+              </v-icon>
+              <v-icon color="#BFBFBF" large @click="addFav(pokeDatos, i)" v-else
+                >mdi-star</v-icon
+              >
+            </div>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
 
 
 
@@ -57,12 +126,15 @@ export default {
     return {
     footer : true,
       selected: Boolean,
+      dialog:false,
       option: false,
+      pokeDatos: {},
+
     };
   },
   computed: {
-    ...mapState(["pokeList","allFav","favoritos"]),
-    ...mapGetters(['allFav','pokemonsFiltradosPorNombre']),
+    ...mapState(["pokeList","allFav","favoritos","pokemonInfo"]),
+    ...mapGetters(['allFav','pokemonsFiltradosPorNombre','pokemonInfo']),
     filtradosPorNombre(){
        return this.pokemonsFiltradosPorNombre(this.pokemonName);
     }
@@ -71,7 +143,7 @@ export default {
     // this.$store.dispatch("getPokemonList");
   },
   methods: {
-      ...mapActions(['addFavorite','removeFavorite']),
+      ...mapActions(['addFavorite','removeFavorite','getPokemonInfo']),
       ...mapMutations(['ADD_FAVORITE','REMOVE_FAVORITE']),
     add(pokemon){
         // this.addFavorite(pokemon);
@@ -83,13 +155,11 @@ export default {
         console.log(this.favoritos)
 
     },
-    test(){
-        console.log('allFav: '+this.$store.allFav)
-        console.log('option: '+this.option)
-        console.log( this.favoritos)
-
-
-    }
+    getPokeInfo(pokemon) {
+      this.pokeDatos = pokemon;
+      this.dialog = true;
+      this.getPokemonInfo(pokemon.name);
+    },
   }
 };
 </script>
