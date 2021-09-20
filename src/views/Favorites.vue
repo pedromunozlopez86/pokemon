@@ -55,6 +55,7 @@ import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+    footer : true,
       selected: Boolean,
       option: false,
     };

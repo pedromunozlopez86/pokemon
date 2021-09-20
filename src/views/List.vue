@@ -15,6 +15,7 @@
         <div class="fondo">
           <v-list-item-group v-model="selected" multiple>
             <template v-for="(pokemon, i) in filtradosPorNombre">
+
               <v-list-item :key="i" class=" my-2 white text-left">
                 <v-list-item-content class="">
                   <v-list-item-title
@@ -43,6 +44,7 @@
                   </div>
                 </v-list-item-action>
               </v-list-item>
+
             </template>
           </v-list-item-group>
         </div>
@@ -123,6 +125,7 @@ export default {
   components: { Dialog },
   data() {
     return {
+    footer : true,
       selected: Boolean,
       option: false,
       pokemonName: "",
