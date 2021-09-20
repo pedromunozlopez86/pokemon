@@ -1,60 +1,60 @@
 <template class="error">
   <v-container class="text-center" id="contenedor">
     <v-row>
-      <v-col cols="12" class="text-center" >
+      <v-col cols="12" class="text-center">
         <div class="d-flex-row">
           <div class="mx-md-16  px-md-16">
-          <v-text-field
-            label="Search"
-            single-line
-            prepend-inner-icon="mdi-magnify"
-            class="text-center mx-md-16 px-md-16 mx-5"
-            elevation-1
-            v-model="pokemonName"
-            id="search-input"
-          ></v-text-field>
+            <v-text-field
+              label="Search"
+              single-line
+              prepend-inner-icon="mdi-magnify"
+              class="text-center mx-md-16 px-md-16 mx-5"
+              elevation-1
+              v-model="pokemonName"
+              id="search-input"
+            ></v-text-field>
           </div>
           <div>
-
-          <v-card class="mx-auto bg--white pt-0" max-width="570">
-            <v-list class="py-0">
-              <div class="fondo">
-                <v-list-item-group v-model="selected" multiple>
-                  <template v-for="(pokemon, i) in filtradosPorNombre">
-                    <v-list-item :key="i" class=" my-2 white text-left">
-                      <v-list-item-content class="">
-                        <v-list-item-title
+            <v-card class="mx-auto bg--white pt-0" max-width="570">
+              <v-list class="py-0">
+                <div class="fondo">
+                  <v-list-item-group v-model="selected" multiple>
+                    <template v-for="(pokemon, i) in filtradosPorNombre">
+                      <v-list-item :key="i" class=" my-2 white text-left">
+                        <v-list-item-content
+                          class=""
                           @click="getPokeInfo(pokemon)"
-                          v-text="pokemon.name"
-                        ></v-list-item-title>
-                      </v-list-item-content>
-                      <v-list-item-action class="pl-4">
-                        <div class="fav pl-1 pt-1">
-                          <v-icon
-                            v-if="pokemon.favorito"
-                            color="#ECA539"
-                            large
-                            @click="delFav(pokemon, i)"
-                          >
-                            mdi-star
-                          </v-icon>
-                          <v-icon
-                            v-else
-                            color="#BFBFBF"
-                            large
-                            @click="addFav(pokemon, i)"
-                          >
-                            mdi-star</v-icon
-                          >
-                        </div>
-                      </v-list-item-action>
-                    </v-list-item>
-                  </template>
-                </v-list-item-group>
-              </div>
-            </v-list>
-          </v-card>
-
+                        >
+                          <v-list-item-title
+                            v-text="pokemon.name"
+                          ></v-list-item-title>
+                        </v-list-item-content>
+                        <v-list-item-action class="pl-4">
+                          <div class="fav pl-1 pt-1">
+                            <v-icon
+                              v-if="pokemon.favorito"
+                              color="#ECA539"
+                              large
+                              @click="delFav(pokemon, i)"
+                            >
+                              mdi-star
+                            </v-icon>
+                            <v-icon
+                              v-else
+                              color="#BFBFBF"
+                              large
+                              @click="addFav(pokemon, i)"
+                            >
+                              mdi-star</v-icon
+                            >
+                          </div>
+                        </v-list-item-action>
+                      </v-list-item>
+                    </template>
+                  </v-list-item-group>
+                </div>
+              </v-list>
+            </v-card>
           </div>
 
           <!-- <Dialog/> -->
