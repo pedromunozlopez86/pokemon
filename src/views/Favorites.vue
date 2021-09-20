@@ -15,13 +15,11 @@
           <v-list-item-group v-model="selected" multiple>
             <template v-for="({pokemon}=pokemon,i) in favoritos">
               <v-list-item :key="i" class=" my-2 white text-left">
-                <!-- <template v-slot:default="{  }"> -->
                   <v-list-item-content class="">
                     <v-list-item-title
                      @click="getPokeInfo(pokemon)"
                       v-text="pokemon.name"
                     ></v-list-item-title>
-
                   </v-list-item-content>
                   <v-list-item-action class="pl-4">
                     <div class="fav pl-1 pt-1">
@@ -32,7 +30,7 @@
                         mdi-star</v-icon>
                     </div>
                   </v-list-item-action>
-                <!-- </template> -->
+
               </v-list-item>
             </template>
           </v-list-item-group>

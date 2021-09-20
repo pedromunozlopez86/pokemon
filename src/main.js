@@ -4,8 +4,11 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import axios from 'axios';
+import VueClipboard from 'vue-clipboard2'
 
 Vue.config.productionTip = false
+// VueClipboard.config.autoSetContainer = true
+Vue.use(VueClipboard) 
 
 new Vue({
   router,

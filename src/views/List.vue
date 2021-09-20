@@ -98,7 +98,8 @@
             <v-divider></v-divider>
           </v-card-text>
           <v-card-actions class="d-flex justify-space-between">
-            <v-btn color="error" rounded class="mb-3">
+            <v-btn @click="copiar"
+             color="error" rounded class="mb-3">
               Share with my friends
             </v-btn>
 
@@ -146,6 +147,18 @@ export default {
   },
   created() {},
   methods: {
+      copiar(){
+        let format = `Name: ${this.pokeDatos.name}, Weight: ${this.pokemonInfo.weight}  `
+        // let container = this.$refs.container
+        this.$copyText(JSON.stringify(format)).then(function (e) {
+          alert('Copied')
+          console.log(e)
+        }, function (e) {
+          alert('Can not copy')
+          console.log(e)
+        })
+
+    },
     ...mapActions(["addFavorite", "removeFavorite", "getPokemonInfo"]),
     ...mapMutations(["ADD_FAVORITE", "REMOVE_FAVORITE"]),
 
